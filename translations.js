@@ -5,7 +5,7 @@ const translations = {
     en: {
         // Common
         welcome: "Welcome",
-        welcomeTo: "Welcome to Life Guardian",
+        welcomeTo: "Welcome to Legacy Whisperer",
         setupSubtitle: "Let's set up your personal safety monitoring system",
         step: "Step",
         of: "of",
@@ -44,7 +44,7 @@ const translations = {
         completeSetup: "Complete Setup",
         
         // Main App
-        appTitle: "Life Guardian",
+        appTitle: "Legacy Whisperer",
         welcomeUser: "Welcome",
         youveBeenAlive: "You've Been Alive For",
         years: "Years",
@@ -104,7 +104,7 @@ const translations = {
     zh: {
         // Common
         welcome: "欢迎",
-        welcomeTo: "欢迎使用生命守护者",
+        welcomeTo: "欢迎使用遗产低语者",
         setupSubtitle: "让我们设置您的个人安全监控系统",
         step: "步骤",
         of: "/",
@@ -143,7 +143,7 @@ const translations = {
         completeSetup: "完成设置",
         
         // Main App
-        appTitle: "生命守护者",
+        appTitle: "遗产低语者",
         welcomeUser: "欢迎",
         youveBeenAlive: "您已经活了",
         years: "年",
@@ -202,7 +202,7 @@ const translations = {
     ja: {
         // Common
         welcome: "ようこそ",
-        welcomeTo: "ライフガーディアンへようこそ",
+        welcomeTo: "レガシーウィスパラーへようこそ",
         setupSubtitle: "個人の安全監視システムを設定しましょう",
         step: "ステップ",
         of: "/",
@@ -241,7 +241,7 @@ const translations = {
         completeSetup: "セットアップ完了",
         
         // Main App
-        appTitle: "ライフガーディアン",
+        appTitle: "レガシーウィスパラー",
         welcomeUser: "ようこそ",
         youveBeenAlive: "あなたが生きてきた時間",
         years: "年",
