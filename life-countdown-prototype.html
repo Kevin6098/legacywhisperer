@@ -1,0 +1,996 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Legacy Whisperer - 生命倒计时 App 原型设计</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+            background: #f5f7fa;
+            padding: 20px;
+            color: #333;
+        }
+
+        .prototype-container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .page-header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 30px;
+            background: linear-gradient(135deg, #7A8C99 0%, #6B7C85 100%);
+            color: white;
+            border-radius: 15px;
+        }
+
+        .page-header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        .page-header p {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+
+        .screens-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .screen-card {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .screen-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.15);
+        }
+
+        .screen-title {
+            background: linear-gradient(135deg, #7A8C99 0%, #6B7C85 100%);
+            color: white;
+            padding: 15px 20px;
+            font-size: 1.2em;
+            font-weight: 600;
+            text-align: center;
+        }
+
+        /* iPhone Mockup Style */
+        .phone-mockup {
+            width: 100%;
+            background: #000;
+            border-radius: 30px;
+            padding: 10px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        .phone-screen {
+            background: #fff;
+            border-radius: 25px;
+            overflow: hidden;
+            min-height: 600px;
+            position: relative;
+        }
+
+        /* Status Bar */
+        .status-bar {
+            background: #fff;
+            padding: 8px 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 12px;
+            font-weight: 600;
+            color: #333;
+            border-bottom: 1px solid #eee;
+        }
+
+        .status-left {
+            display: flex;
+            gap: 5px;
+            align-items: center;
+        }
+
+        .status-right {
+            display: flex;
+            gap: 5px;
+            align-items: center;
+        }
+
+        /* Navigation Bar */
+        .nav-bar {
+            background: #7A8C99;
+            padding: 12px 15px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            color: white;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: white;
+        }
+
+        .nav-actions {
+            display: flex;
+            gap: 15px;
+        }
+
+        .nav-icon {
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            cursor: pointer;
+        }
+
+        /* Main Content */
+        .content {
+            padding: 15px;
+            min-height: 400px;
+            background: #7A8C99;
+        }
+
+        /* 首页样式 */
+        .welcome-section {
+            text-align: center;
+            padding: 30px 15px;
+            color: white;
+        }
+
+        .welcome-title {
+            font-size: 28px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .welcome-subtitle {
+            font-size: 16px;
+            opacity: 0.9;
+            margin-bottom: 30px;
+        }
+
+        .countdown-container {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 30px 20px;
+            margin-bottom: 30px;
+        }
+
+        .countdown-title {
+            font-size: 16px;
+            color: white;
+            opacity: 0.9;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .time-grid {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 10px;
+        }
+
+        .time-unit {
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 12px;
+            padding: 15px 8px;
+            text-align: center;
+            color: white;
+        }
+
+        .time-value {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .time-label {
+            font-size: 11px;
+            opacity: 0.9;
+        }
+
+        .quote-section {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 25px;
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .quote-icon {
+            font-size: 32px;
+            margin-bottom: 15px;
+        }
+
+        .quote-text {
+            font-size: 16px;
+            font-style: italic;
+            color: #4A555C;
+            line-height: 1.6;
+            margin-bottom: 10px;
+        }
+
+        .quote-author {
+            font-size: 14px;
+            color: #6B7C85;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .stat-card {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 20px;
+            border-radius: 15px;
+            text-align: center;
+        }
+
+        .stat-icon {
+            font-size: 28px;
+            margin-bottom: 10px;
+            color: #7A8C99;
+        }
+
+        .stat-number {
+            font-size: 32px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 5px;
+        }
+
+        .stat-label {
+            font-size: 14px;
+            color: #6B7C85;
+        }
+
+        /* 设置页样式 */
+        .settings-section {
+            margin-bottom: 25px;
+        }
+
+        .settings-title {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.7);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+            padding: 0 15px;
+        }
+
+        .settings-item {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 15px;
+            margin-bottom: 10px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            cursor: pointer;
+        }
+
+        .settings-item-left {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .settings-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            background: #f0f4f8;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #7A8C99;
+            font-size: 18px;
+        }
+
+        .settings-text {
+            flex: 1;
+        }
+
+        .settings-label {
+            font-size: 16px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 3px;
+        }
+
+        .settings-desc {
+            font-size: 13px;
+            color: #999;
+        }
+
+        .toggle-switch {
+            width: 50px;
+            height: 28px;
+            background: #ddd;
+            border-radius: 14px;
+            position: relative;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .toggle-switch.active {
+            background: #7A8C99;
+        }
+
+        .toggle-switch::after {
+            content: '';
+            position: absolute;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: white;
+            top: 2px;
+            left: 2px;
+            transition: transform 0.3s ease;
+        }
+
+        .toggle-switch.active::after {
+            transform: translateX(22px);
+        }
+
+        /* 表单样式 */
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-label {
+            display: block;
+            font-size: 14px;
+            font-weight: 600;
+            color: white;
+            margin-bottom: 8px;
+            opacity: 0.9;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 14px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 12px;
+            font-size: 15px;
+            background: rgba(255, 255, 255, 0.95);
+            color: #333;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: white;
+        }
+
+        .form-select {
+            width: 100%;
+            padding: 14px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 12px;
+            font-size: 15px;
+            background: rgba(255, 255, 255, 0.95);
+            color: #333;
+            cursor: pointer;
+        }
+
+        .form-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 30px;
+        }
+
+        .btn {
+            flex: 1;
+            padding: 14px;
+            border: none;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary {
+            background: rgba(255, 255, 255, 0.95);
+            color: #7A8C99;
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Tab Bar */
+        .tab-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: white;
+            border-top: 1px solid #eee;
+            display: flex;
+            justify-content: space-around;
+            padding: 10px 0;
+            z-index: 1000;
+        }
+
+        .tab-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 5px;
+            cursor: pointer;
+            color: #999;
+            transition: color 0.3s ease;
+        }
+
+        .tab-item.active {
+            color: #7A8C99;
+        }
+
+        .tab-icon {
+            font-size: 22px;
+        }
+
+        .tab-label {
+            font-size: 11px;
+        }
+
+        /* 联系人和收件人列表 */
+        .contact-list {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 15px;
+            margin-top: 15px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 15px;
+            border-bottom: 1px solid #eee;
+            cursor: pointer;
+        }
+
+        .contact-item:last-child {
+            border-bottom: none;
+        }
+
+        .contact-info {
+            flex: 1;
+        }
+
+        .contact-name {
+            font-size: 16px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 5px;
+        }
+
+        .contact-details {
+            font-size: 13px;
+            color: #999;
+        }
+
+        .add-button {
+            width: 100%;
+            padding: 14px;
+            background: rgba(255, 255, 255, 0.2);
+            border: 2px dashed rgba(255, 255, 255, 0.5);
+            border-radius: 12px;
+            color: white;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        /* 描述文本 */
+        .screen-description {
+            padding: 15px 20px;
+            background: #f8f9fa;
+            border-top: 1px solid #eee;
+            font-size: 13px;
+            color: #666;
+            line-height: 1.6;
+        }
+
+        .feature-section {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        .feature-section h2 {
+            color: #333;
+            margin-bottom: 20px;
+            font-size: 1.8em;
+        }
+
+        .feature-section h3 {
+            color: #7A8C99;
+            margin: 25px 0 15px;
+            font-size: 1.3em;
+        }
+
+        .feature-section ul {
+            margin-left: 20px;
+            line-height: 2;
+        }
+
+        .feature-section li {
+            margin-bottom: 10px;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <div class="prototype-container">
+        <!-- 页面标题 -->
+        <div class="page-header">
+            <h1><i class="fas fa-shield-alt"></i> Legacy Whisperer</h1>
+            <p>生命倒计时 App 原型设计 - 可直接用于开发实现</p>
+        </div>
+
+        <!-- 产品规划说明 -->
+        <div class="feature-section">
+            <h2>📋 产品规划与功能设计</h2>
+            
+            <h3>核心功能</h3>
+            <ul>
+                <li><strong>生命倒计时：</strong>显示从出生日期开始的生命时长（年、月、日、时、分、秒）</li>
+                <li><strong>日常激励：</strong>每日显示励志语录，提供正能量</li>
+                <li><strong>紧急联系人：</strong>设置紧急联系人，2天未活动自动通知</li>
+                <li><strong>最后留言：</strong>设置最后留言，3天未活动自动发送给指定收件人</li>
+                <li><strong>活动追踪：</strong>自动记录用户活动，监控应用使用情况</li>
+                <li><strong>提醒系统：</strong>1天、2天、3天未活动时自动触发不同级别的提醒</li>
+            </ul>
+
+            <h3>页面架构</h3>
+            <ul>
+                <li><strong>首页：</strong>生命倒计时显示、日常激励语录、统计信息（总时长、上次活动时间）</li>
+                <li><strong>设置页：</strong>基本信息设置、紧急联系人管理、最后留言设置、提醒开关</li>
+                <li><strong>添加/编辑页：</strong>添加或编辑紧急联系人、最后留言收件人</li>
+            </ul>
+
+            <h3>视觉设计要点</h3>
+            <ul>
+                <li><strong>色彩方案：</strong>使用温和的蓝灰色系（#7A8C99, #6B7C85），营造平静、安心的氛围</li>
+                <li><strong>图标系统：</strong>使用 FontAwesome 图标库，保持一致的视觉风格</li>
+                <li><strong>卡片设计：</strong>采用圆角卡片布局，使用半透明背景增强层次感</li>
+                <li><strong>状态指示：</strong>清晰的状态显示，让用户一目了然</li>
+            </ul>
+        </div>
+
+        <!-- 原型界面展示 -->
+        <div class="screens-grid">
+            <!-- 首页 - 倒计时显示 -->
+            <div class="screen-card">
+                <div class="screen-title">首页 - 生命倒计时</div>
+                <div class="phone-mockup">
+                    <div class="phone-screen">
+                        <div class="status-bar">
+                            <div class="status-left">9:41</div>
+                            <div class="status-right">
+                                <i class="fas fa-signal"></i>
+                                <i class="fas fa-wifi"></i>
+                                <i class="fas fa-battery-three-quarters"></i>
+                            </div>
+                        </div>
+                        <div class="nav-bar">
+                            <div class="nav-title">🛡️ Legacy Whisperer</div>
+                            <div class="nav-actions">
+                                <div class="nav-icon"><i class="fas fa-cog"></i></div>
+                            </div>
+                        </div>
+                        <div class="content">
+                            <div class="welcome-section">
+                                <div class="welcome-title">欢迎, 张三</div>
+                                <div class="welcome-subtitle">您已经生活了</div>
+                            </div>
+
+                            <div class="countdown-container">
+                                <div class="countdown-title">生命时长</div>
+                                <div class="time-grid">
+                                    <div class="time-unit">
+                                        <div class="time-value">28</div>
+                                        <div class="time-label">年</div>
+                                    </div>
+                                    <div class="time-unit">
+                                        <div class="time-value">5</div>
+                                        <div class="time-label">月</div>
+                                    </div>
+                                    <div class="time-unit">
+                                        <div class="time-value">12</div>
+                                        <div class="time-label">日</div>
+                                    </div>
+                                    <div class="time-unit">
+                                        <div class="time-value">8</div>
+                                        <div class="time-label">时</div>
+                                    </div>
+                                    <div class="time-unit">
+                                        <div class="time-value">45</div>
+                                        <div class="time-label">分</div>
+                                    </div>
+                                    <div class="time-unit">
+                                        <div class="time-value">32</div>
+                                        <div class="time-label">秒</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="stats-grid">
+                                <div class="stat-card">
+                                    <div class="stat-icon"><i class="fas fa-clock"></i></div>
+                                    <div class="stat-number">10287</div>
+                                    <div class="stat-label">总天数</div>
+                                </div>
+                                <div class="stat-card">
+                                    <div class="stat-icon"><i class="fas fa-check-circle"></i></div>
+                                    <div class="stat-number">今天</div>
+                                    <div class="stat-label">上次活动</div>
+                                </div>
+                            </div>
+
+                            <div class="quote-section">
+                                <div class="quote-icon">💭</div>
+                                <div class="quote-text">"Life is not measured by the number of breaths we take, but by the moments that take our breath away."</div>
+                                <div class="quote-author">— Maya Angelou</div>
+                            </div>
+                        </div>
+                        
+                        <div class="tab-bar">
+                            <div class="tab-item active">
+                                <i class="fas fa-home tab-icon"></i>
+                                <span class="tab-label">首页</span>
+                            </div>
+                            <div class="tab-item">
+                                <i class="fas fa-bell tab-icon"></i>
+                                <span class="tab-label">提醒</span>
+                            </div>
+                            <div class="tab-item">
+                                <i class="fas fa-users tab-icon"></i>
+                                <span class="tab-label">联系人</span>
+                            </div>
+                            <div class="tab-item">
+                                <i class="fas fa-cog tab-icon"></i>
+                                <span class="tab-label">设置</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="screen-description">
+                    <strong>功能说明：</strong>首页展示生命倒计时（年、月、日、时、分、秒），实时更新。显示总天数统计和上次活动时间。每日展示不同的励志语录，提供正能量。
+                </div>
+            </div>
+
+            <!-- 设置页 -->
+            <div class="screen-card">
+                <div class="screen-title">设置页面</div>
+                <div class="phone-mockup">
+                    <div class="phone-screen">
+                        <div class="status-bar">
+                            <div class="status-left">9:41</div>
+                            <div class="status-right">
+                                <i class="fas fa-signal"></i>
+                                <i class="fas fa-wifi"></i>
+                                <i class="fas fa-battery-three-quarters"></i>
+                            </div>
+                        </div>
+                        <div class="nav-bar">
+                            <div class="nav-icon"><i class="fas fa-arrow-left"></i></div>
+                            <div class="nav-title">设置</div>
+                            <div style="width: 32px;"></div>
+                        </div>
+                        <div class="content">
+                            <div class="settings-section">
+                                <div class="settings-title">基本信息</div>
+                                <div class="form-group">
+                                    <label class="form-label">语言</label>
+                                    <select class="form-select">
+                                        <option>English</option>
+                                        <option>中文</option>
+                                        <option>日本語</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">出生日期</label>
+                                    <input type="date" class="form-input" value="1996-08-15">
+                                </div>
+                            </div>
+
+                            <div class="settings-section">
+                                <div class="settings-title">提醒设置</div>
+                                <div class="settings-item">
+                                    <div class="settings-item-left">
+                                        <div class="settings-icon"><i class="fas fa-bell"></i></div>
+                                        <div class="settings-text">
+                                            <div class="settings-label">启用通知</div>
+                                            <div class="settings-desc">接收活动提醒通知</div>
+                                        </div>
+                                    </div>
+                                    <div class="toggle-switch active"></div>
+                                </div>
+                                <div class="settings-item">
+                                    <div class="settings-item-left">
+                                        <div class="settings-icon"><i class="fas fa-phone-alt"></i></div>
+                                        <div class="settings-text">
+                                            <div class="settings-label">自动联系紧急服务</div>
+                                            <div class="settings-desc">2天未活动时自动通知</div>
+                                        </div>
+                                    </div>
+                                    <div class="toggle-switch active"></div>
+                                </div>
+                            </div>
+
+                            <div class="settings-section">
+                                <div class="settings-title">紧急联系人</div>
+                                <div class="settings-item">
+                                    <div class="settings-item-left">
+                                        <div class="settings-icon"><i class="fas fa-user-plus"></i></div>
+                                        <div class="settings-text">
+                                            <div class="settings-label">管理联系人</div>
+                                            <div class="settings-desc">2天未活动时通知</div>
+                                        </div>
+                                    </div>
+                                    <div class="nav-icon" style="background: rgba(255,255,255,0.95); color: #7A8C99;"><i class="fas fa-chevron-right"></i></div>
+                                </div>
+                            </div>
+
+                            <div class="settings-section">
+                                <div class="settings-title">最后留言</div>
+                                <div class="settings-item">
+                                    <div class="settings-item-left">
+                                        <div class="settings-icon"><i class="fas fa-envelope"></i></div>
+                                        <div class="settings-text">
+                                            <div class="settings-label">管理收件人</div>
+                                            <div class="settings-desc">3天未活动时发送</div>
+                                        </div>
+                                    </div>
+                                    <div class="nav-icon" style="background: rgba(255,255,255,0.95); color: #7A8C99;"><i class="fas fa-chevron-right"></i></div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="tab-bar">
+                            <div class="tab-item">
+                                <i class="fas fa-home tab-icon"></i>
+                                <span class="tab-label">首页</span>
+                            </div>
+                            <div class="tab-item">
+                                <i class="fas fa-bell tab-icon"></i>
+                                <span class="tab-label">提醒</span>
+                            </div>
+                            <div class="tab-item">
+                                <i class="fas fa-users tab-icon"></i>
+                                <span class="tab-label">联系人</span>
+                            </div>
+                            <div class="tab-item active">
+                                <i class="fas fa-cog tab-icon"></i>
+                                <span class="tab-label">设置</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="screen-description">
+                    <strong>功能说明：</strong>设置页面包含基本信息设置（语言、出生日期）、提醒开关、紧急联系人管理和最后留言管理。使用开关控件和列表项展示。
+                </div>
+            </div>
+
+            <!-- 添加联系人页 -->
+            <div class="screen-card">
+                <div class="screen-title">添加紧急联系人</div>
+                <div class="phone-mockup">
+                    <div class="phone-screen">
+                        <div class="status-bar">
+                            <div class="status-left">9:41</div>
+                            <div class="status-right">
+                                <i class="fas fa-signal"></i>
+                                <i class="fas fa-wifi"></i>
+                                <i class="fas fa-battery-three-quarters"></i>
+                            </div>
+                        </div>
+                        <div class="nav-bar">
+                            <div class="nav-icon"><i class="fas fa-arrow-left"></i></div>
+                            <div class="nav-title">添加联系人</div>
+                            <div style="width: 32px;"></div>
+                        </div>
+                        <div class="content">
+                            <div class="form-group">
+                                <label class="form-label">姓名</label>
+                                <input type="text" class="form-input" placeholder="请输入姓名">
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label">电话号码</label>
+                                <input type="tel" class="form-input" placeholder="请输入电话号码">
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label">电子邮件（可选）</label>
+                                <input type="email" class="form-input" placeholder="请输入电子邮件">
+                            </div>
+
+                            <div class="form-actions">
+                                <button class="btn btn-secondary">取消</button>
+                                <button class="btn btn-primary">保存</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="screen-description">
+                    <strong>功能说明：</strong>添加或编辑紧急联系人信息。包含姓名、电话号码和电子邮件（可选）。表单验证确保必填项完整。2天未活动时会自动通知这些联系人。
+                </div>
+            </div>
+
+            <!-- 联系人列表页 -->
+            <div class="screen-card">
+                <div class="screen-title">紧急联系人列表</div>
+                <div class="phone-mockup">
+                    <div class="phone-screen">
+                        <div class="status-bar">
+                            <div class="status-left">9:41</div>
+                            <div class="status-right">
+                                <i class="fas fa-signal"></i>
+                                <i class="fas fa-wifi"></i>
+                                <i class="fas fa-battery-three-quarters"></i>
+                            </div>
+                        </div>
+                        <div class="nav-bar">
+                            <div class="nav-icon"><i class="fas fa-arrow-left"></i></div>
+                            <div class="nav-title">紧急联系人</div>
+                            <div class="nav-actions">
+                                <div class="nav-icon"><i class="fas fa-plus"></i></div>
+                            </div>
+                        </div>
+                        <div class="content">
+                            <div class="contact-list">
+                                <div class="contact-item">
+                                    <div class="contact-info">
+                                        <div class="contact-name">李四</div>
+                                        <div class="contact-details">📞 +86 138-0000-0000<br>📧 lisi@example.com</div>
+                                    </div>
+                                    <div class="nav-icon" style="background: rgba(255,255,255,0.95); color: #7A8C99;"><i class="fas fa-edit"></i></div>
+                                </div>
+                                <div class="contact-item">
+                                    <div class="contact-info">
+                                        <div class="contact-name">王五</div>
+                                        <div class="contact-details">📞 +86 139-0000-0000<br>📧 wangwu@example.com</div>
+                                    </div>
+                                    <div class="nav-icon" style="background: rgba(255,255,255,0.95); color: #7A8C99;"><i class="fas fa-edit"></i></div>
+                                </div>
+                            </div>
+                            <div class="add-button">+ 添加联系人</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="screen-description">
+                    <strong>功能说明：</strong>显示所有紧急联系人列表。每个联系人显示姓名、电话号码和电子邮件。支持编辑和删除操作。2天未活动时会自动通知这些联系人。
+                </div>
+            </div>
+
+            <!-- 最后留言设置页 -->
+            <div class="screen-card">
+                <div class="screen-title">最后留言设置</div>
+                <div class="phone-mockup">
+                    <div class="phone-screen">
+                        <div class="status-bar">
+                            <div class="status-left">9:41</div>
+                            <div class="status-right">
+                                <i class="fas fa-signal"></i>
+                                <i class="fas fa-wifi"></i>
+                                <i class="fas fa-battery-three-quarters"></i>
+                            </div>
+                        </div>
+                        <div class="nav-bar">
+                            <div class="nav-icon"><i class="fas fa-arrow-left"></i></div>
+                            <div class="nav-title">最后留言</div>
+                            <div style="width: 32px;"></div>
+                        </div>
+                        <div class="content">
+                            <div class="form-group">
+                                <label class="form-label">您的留言</label>
+                                <textarea class="form-input" rows="8" placeholder="请输入您的最后留言...">亲爱的家人和朋友，感谢你们一直以来的陪伴和支持。如果我3天没有活动，这封信会自动发送给你们。请记住，我一直在你们身边。</textarea>
+                            </div>
+
+                            <div style="margin-top: 20px;">
+                                <label class="form-label">收件人列表</label>
+                                <div class="contact-list">
+                                    <div class="contact-item">
+                                        <div class="contact-info">
+                                            <div class="contact-name">张三</div>
+                                            <div class="contact-details">📧 zhang@example.com</div>
+                                        </div>
+                                        <div class="nav-icon" style="background: rgba(255,255,255,0.95); color: #dc3545;"><i class="fas fa-trash"></i></div>
+                                    </div>
+                                </div>
+                                <div class="add-button">+ 添加收件人</div>
+                            </div>
+
+                            <div class="form-actions">
+                                <button class="btn btn-primary">保存留言</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="screen-description">
+                    <strong>功能说明：</strong>设置最后留言内容和收件人列表。留言会在3天未活动时自动发送给所有收件人。支持添加、编辑和删除收件人。
+                </div>
+            </div>
+        </div>
+
+        <!-- 开发实现建议 -->
+        <div class="feature-section">
+            <h2>💻 开发实现建议</h2>
+            
+            <h3>技术栈推荐</h3>
+            <ul>
+                <li><strong>iOS：</strong>Swift + SwiftUI，本地数据存储使用 UserDefaults 或 Core Data</li>
+                <li><strong>Android：</strong>Kotlin + Jetpack Compose，本地数据存储使用 SharedPreferences 或 Room Database</li>
+                <li><strong>跨平台：</strong>React Native 或 Flutter（可选）</li>
+            </ul>
+
+            <h3>核心功能实现</h3>
+            <ul>
+                <li><strong>倒计时计算：</strong>使用出生日期计算总时长，每秒更新显示（年、月、日、时、分、秒）</li>
+                <li><strong>活动追踪：</strong>监听应用打开、页面焦点变化，记录最后活动时间</li>
+                <li><strong>提醒系统：</strong>使用本地通知（Local Notifications）实现1天、2天、3天未活动的提醒</li>
+                <li><strong>自动通知：</strong>2天未活动时通过短信/邮件API自动通知紧急联系人</li>
+                <li><strong>最后留言发送：</strong>3天未活动时通过邮件API自动发送最后留言</li>
+            </ul>
+
+            <h3>注意事项</h3>
+            <ul>
+                <li>确保所有交互元素符合最小触摸区域（44x44px）</li>
+                <li>适配不同屏幕尺寸和分辨率</li>
+                <li>考虑深色模式支持（可选）</li>
+                <li>实现数据备份与恢复功能</li>
+                <li>保护用户隐私，敏感信息加密存储</li>
+                <li>短信/邮件发送需要后端服务支持（可使用 Twilio、SendGrid 等服务）</li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>
