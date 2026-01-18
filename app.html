@@ -80,10 +80,22 @@
                     </select>
                 </div>
                 
+                <!-- Theme Selector -->
+                <div class="setting-item">
+                    <label for="themeSelect" id="themeLabel">Theme:</label>
+                    <select id="themeSelect">
+                        <option value="blue-gray">Muted Blue-Gray (Calm & Steady)</option>
+                        <option value="warm-beige">Warm Off-White (Gentle & Quiet)</option>
+                        <option value="sage-green">Sage Green (Grounded & Alive)</option>
+                    </select>
+                </div>
+                
                 <div class="setting-item">
                     <label for="birthDate" id="birthDateLabel">Your Birth Date:</label>
-                    <input type="date" id="birthDate">
-                    <button class="btn btn-primary" id="saveBirthDateBtn"><span id="saveBtn">Save</span></button>
+                    <div class="date-input-wrapper">
+                        <input type="date" id="birthDate">
+                        <button class="btn btn-primary" id="saveBirthDateBtn"><span id="saveBtn">Save</span></button>
+                    </div>
                 </div>
                 <div class="setting-item">
                     <label>

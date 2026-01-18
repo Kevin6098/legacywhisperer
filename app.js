@@ -27,10 +27,11 @@ class LifeGuardian {
                 return;
             }
             
-            this.loadData();
-            this.setupLanguageSelector();
-            this.setupEventListeners();
-            this.applyTranslations();
+        this.loadData();
+        this.setupLanguageSelector();
+        this.setupThemeSelector();
+        this.setupEventListeners();
+        this.applyTranslations();
             this.loadDailyQuote();
             this.updateAliveCounter();
             this.startAliveCounter();
@@ -76,6 +77,32 @@ class LifeGuardian {
                 localStorage.setItem('language', this.currentLang);
                 this.applyTranslations();
             });
+        }
+    }
+
+    setupThemeSelector() {
+        const select = document.getElementById('themeSelect');
+        if (select) {
+            // Load saved theme or default to blue-gray
+            const savedTheme = localStorage.getItem('theme') || 'blue-gray';
+            select.value = savedTheme;
+            this.applyTheme(savedTheme);
+            
+            select.addEventListener('change', (e) => {
+                const theme = e.target.value;
+                this.applyTheme(theme);
+                localStorage.setItem('theme', theme);
+            });
+        }
+    }
+
+    applyTheme(theme) {
+        // Remove all theme classes
+        document.body.classList.remove('theme-blue-gray', 'theme-warm-beige', 'theme-sage-green');
+        
+        // Add the selected theme class
+        if (theme && theme !== 'blue-gray') {
+            document.body.classList.add(`theme-${theme}`);
         }
     }
 
