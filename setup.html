@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Legacy Whisperer - Setup</title>
+    <link rel="stylesheet" href="styles.css">
+    <script>
+        // Redirect to app if setup is already complete
+        (function() {
+            const setupComplete = localStorage.getItem('setupComplete');
+            if (setupComplete === 'true') {
+                window.location.href = 'app.html';
+            }
+        })();
+    </script>
+</head>
+<body>
+    <!-- Setup/Onboarding Screen -->
+    <div class="setup-container" id="setupContainer">
+        <div class="setup-content">
+            <header class="setup-header">
+                <h1 id="setupTitle">🛡️ Welcome to Legacy Whisperer</h1>
+                <p class="subtitle" id="setupSubtitle">Let's set up your personal safety monitoring system</p>
+            </header>
+
+            <div class="language-selector">
+                <label for="languageSelect">Language / 语言 / 言語:</label>
+                <select id="languageSelect">
+                    <option value="en">English</option>
+                    <option value="zh">中文</option>
+                    <option value="ja">日本語</option>
+                </select>
+            </div>
+
+            <div class="setup-progress">
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill"></div>
+                </div>
+                <p class="progress-text"><span id="stepText">Step</span> <span id="currentStep">1</span> <span id="ofText">of</span> 3</p>
+            </div>
+
+            <!-- Step 1: Name and Birthday -->
+            <div class="setup-step active" id="step1">
+                <h2 id="step1Title">Step 1: Your Information</h2>
+                <form id="setupForm1" class="setup-form">
+                    <div class="form-group">
+                        <label for="setupName" id="nameLabel">Your Name *</label>
+                        <input type="text" id="setupName" placeholder="Enter your full name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="setupBirthDate" id="birthDateLabel">Your Birth Date *</label>
+                        <input type="date" id="setupBirthDate" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-large"><span id="nextBtn1">Next</span> →</button>
+                </form>
+            </div>
+
+            <!-- Step 2: Emergency Contact -->
+            <div class="setup-step" id="step2">
+                <h2 id="step2Title">Step 2: Emergency Contact</h2>
+                <p class="info-text" id="step2Description">Add at least one emergency contact who will be notified after 2 days of inactivity</p>
+                <form id="setupForm2" class="setup-form">
+                    <div class="form-group">
+                        <label for="setupContactName" id="contactNameLabel">Contact Name *</label>
+                        <input type="text" id="setupContactName" placeholder="Full name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="setupContactPhone" id="phoneLabel">Phone Number *</label>
+                        <input type="tel" id="setupContactPhone" placeholder="e.g., +1234567890" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="setupContactEmail" id="emailLabel">Email (Optional)</label>
+                        <input type="email" id="setupContactEmail" placeholder="email@example.com">
+                    </div>
+                    <div class="form-actions">
+                        <button type="button" class="btn btn-secondary" id="backStep2">← <span id="backBtn2">Back</span></button>
+                        <button type="submit" class="btn btn-primary btn-large"><span id="nextBtn2">Next</span> →</button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Step 3: Last Words -->
+            <div class="setup-step" id="step3">
+                <h2 id="step3Title">Step 3: Your Last Words</h2>
+                <p class="info-text" id="step3Description">Write a message that will be sent to your recipients after 3 days of inactivity</p>
+                <form id="setupForm3" class="setup-form">
+                    <div class="form-group">
+                        <label for="setupLastWords" id="lastWordsLabel">Your Last Words *</label>
+                        <textarea id="setupLastWords" rows="8" placeholder="Enter your final message here..." required></textarea>
+                        <small id="autoSentInfo">This message will be automatically sent after 3 days of no activity</small>
+                    </div>
+                    <div class="form-group">
+                        <label id="addRecipientsLabel">Add Recipients (Optional - you can add more later)</label>
+                        <div id="setupRecipientsList" class="setup-recipients"></div>
+                        <button type="button" class="btn btn-secondary" id="addSetupRecipientBtn">+ <span id="addRecipientBtnText">Add Recipient</span></button>
+                    </div>
+                    <div class="form-actions">
+                        <button type="button" class="btn btn-secondary" id="backStep3">← <span id="backBtn3">Back</span></button>
+                        <button type="submit" class="btn btn-primary btn-large"><span id="completeBtn">Complete Setup</span> ✓</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Setup Recipient Modal -->
+    <div class="modal" id="setupRecipientModal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2 id="addRecipientTitle">Add Recipient</h2>
+            <form id="setupRecipientForm">
+                <input type="text" id="setupRecipientName" placeholder="Name" required>
+                <input type="tel" id="setupRecipientPhone" placeholder="Phone Number">
+                <input type="email" id="setupRecipientEmail" placeholder="Email" required>
+                <button type="submit" class="btn btn-primary"><span id="addBtnText">Add</span> Recipient</button>
+                <button type="button" class="btn btn-secondary" id="cancelSetupRecipientBtn"><span id="cancelBtnText">Cancel</span></button>
+            </form>
+        </div>
+    </div>
+
+    <script src="translations.js"></script>
+    <script src="setup.js"></script>
+</body>
+</html>
