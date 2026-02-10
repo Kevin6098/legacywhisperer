@@ -217,30 +217,94 @@
             opacity: 0.9;
         }
 
-        .quote-section {
+        /* Last Words section */
+        .last-words-section {
             background: rgba(255, 255, 255, 0.95);
             border-radius: 15px;
-            padding: 25px;
+            padding: 20px;
             margin-top: 20px;
-            text-align: center;
         }
 
-        .quote-icon {
-            font-size: 32px;
-            margin-bottom: 15px;
-        }
-
-        .quote-text {
+        .last-words-title {
             font-size: 16px;
-            font-style: italic;
+            font-weight: 600;
             color: #4A555C;
-            line-height: 1.6;
-            margin-bottom: 10px;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
 
-        .quote-author {
-            font-size: 14px;
+        .last-words-title i {
+            color: #7A8C99;
+        }
+
+        .last-words-options {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .last-words-option {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 16px;
+            background: #f8f9fa;
+            border-radius: 12px;
+            border: 2px solid #eee;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .last-words-option:hover {
+            border-color: #7A8C99;
+            background: #f0f4f8;
+        }
+
+        .last-words-option-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            color: white;
+            flex-shrink: 0;
+        }
+
+        .last-words-option-icon.text {
+            background: linear-gradient(135deg, #7A8C99 0%, #6B7C85 100%);
+        }
+
+        .last-words-option-icon.voice {
+            background: linear-gradient(135deg, #5a9aa8 0%, #4a8a98 100%);
+        }
+
+        .last-words-option-icon.video {
+            background: linear-gradient(135deg, #6b7c85 0%, #5a6b73 100%);
+        }
+
+        .last-words-option-content {
+            flex: 1;
+        }
+
+        .last-words-option-label {
+            font-size: 16px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 4px;
+        }
+
+        .last-words-option-desc {
+            font-size: 13px;
             color: #6B7C85;
+        }
+
+        .last-words-option-arrow {
+            color: #7A8C99;
+            font-size: 14px;
         }
 
         .stats-grid {
@@ -525,6 +589,121 @@
             margin-top: 10px;
         }
 
+        /* 最后留言设置 - 三种类型区块 */
+        .message-type-block {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 18px;
+            margin-bottom: 20px;
+        }
+
+        .message-type-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 14px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #eee;
+        }
+
+        .message-type-header .icon-wrap {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            color: white;
+        }
+
+        .message-type-header .icon-wrap.text { background: linear-gradient(135deg, #7A8C99 0%, #6B7C85 100%); }
+        .message-type-header .icon-wrap.voice { background: linear-gradient(135deg, #5a9aa8 0%, #4a8a98 100%); }
+        .message-type-header .icon-wrap.video { background: linear-gradient(135deg, #6b7c85 0%, #5a6b73 100%); }
+
+        .message-type-header .title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .message-type-block .form-label {
+            color: #4A555C;
+            margin-bottom: 8px;
+        }
+
+        .voice-record-area {
+            background: #f8f9fa;
+            border: 2px dashed #ddd;
+            border-radius: 12px;
+            padding: 24px;
+            text-align: center;
+            margin-bottom: 12px;
+        }
+
+        .voice-record-area .record-btn {
+            width: 64px;
+            height: 64px;
+            border-radius: 50%;
+            background: #7A8C99;
+            color: white;
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 12px;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        .voice-record-area .duration {
+            font-size: 14px;
+            color: #6B7C85;
+        }
+
+        .video-record-area {
+            background: #f8f9fa;
+            border: 2px dashed #ddd;
+            border-radius: 12px;
+            padding: 24px;
+            text-align: center;
+            margin-bottom: 12px;
+            min-height: 140px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .video-record-area .record-btn {
+            padding: 12px 24px;
+            border-radius: 12px;
+            background: #6b7c85;
+            color: white;
+            border: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .video-record-area .hint {
+            font-size: 13px;
+            color: #999;
+            margin-top: 10px;
+        }
+
+        .recipients-inline {
+            margin-top: 12px;
+        }
+
+        .recipients-inline .form-label {
+            font-size: 13px;
+            margin-bottom: 8px;
+        }
+
         /* 描述文本 */
         .screen-description {
             padding: 15px 20px;
@@ -581,9 +760,8 @@
             <h3>核心功能</h3>
             <ul>
                 <li><strong>生命倒计时：</strong>显示从出生日期开始的生命时长（年、月、日、时、分、秒）</li>
-                <li><strong>日常激励：</strong>每日显示励志语录，提供正能量</li>
+                <li><strong>最后留言：</strong>支持文字、语音、视频三种留言方式，3天未活动时自动发送给指定收件人</li>
                 <li><strong>紧急联系人：</strong>设置紧急联系人，2天未活动自动通知</li>
-                <li><strong>最后留言：</strong>设置最后留言，3天未活动自动发送给指定收件人</li>
                 <li><strong>活动追踪：</strong>自动记录用户活动，监控应用使用情况</li>
                 <li><strong>提醒系统：</strong>1天、2天、3天未活动时自动触发不同级别的提醒</li>
             </ul>
@@ -674,10 +852,43 @@
                                 </div>
                             </div>
 
-                            <div class="quote-section">
-                                <div class="quote-icon">💭</div>
-                                <div class="quote-text">"Life is not measured by the number of breaths we take, but by the moments that take our breath away."</div>
-                                <div class="quote-author">— Maya Angelou</div>
+                            <div class="last-words-section">
+                                <div class="last-words-title">
+                                    <i class="fas fa-envelope-open-text"></i>
+                                    最后留言 Last Words
+                                </div>
+                                <div class="last-words-options">
+                                    <div class="last-words-option">
+                                        <div class="last-words-option-icon text">
+                                            <i class="fas fa-comment-alt"></i>
+                                        </div>
+                                        <div class="last-words-option-content">
+                                            <div class="last-words-option-label">文字留言</div>
+                                            <div class="last-words-option-desc">Text message · 3天未活动时发送</div>
+                                        </div>
+                                        <i class="fas fa-chevron-right last-words-option-arrow"></i>
+                                    </div>
+                                    <div class="last-words-option">
+                                        <div class="last-words-option-icon voice">
+                                            <i class="fas fa-microphone"></i>
+                                        </div>
+                                        <div class="last-words-option-content">
+                                            <div class="last-words-option-label">语音留言</div>
+                                            <div class="last-words-option-desc">Voice message · 录制并发送</div>
+                                        </div>
+                                        <i class="fas fa-chevron-right last-words-option-arrow"></i>
+                                    </div>
+                                    <div class="last-words-option">
+                                        <div class="last-words-option-icon video">
+                                            <i class="fas fa-video"></i>
+                                        </div>
+                                        <div class="last-words-option-content">
+                                            <div class="last-words-option-label">视频留言</div>
+                                            <div class="last-words-option-desc">Video message · 录制并发送</div>
+                                        </div>
+                                        <i class="fas fa-chevron-right last-words-option-arrow"></i>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         
@@ -702,7 +913,7 @@
                     </div>
                 </div>
                 <div class="screen-description">
-                    <strong>功能说明：</strong>首页展示生命倒计时（年、月、日、时、分、秒），实时更新。显示总天数统计和上次活动时间。每日展示不同的励志语录，提供正能量。
+                    <strong>功能说明：</strong>首页展示生命倒计时（年、月、日、时、分、秒），实时更新。显示总天数统计和上次活动时间。最后留言区域提供三种方式：文字留言、语音留言、视频留言，点击可进入对应编辑或录制界面，3天未活动时自动发送给收件人。
                 </div>
             </div>
 
@@ -930,13 +1141,46 @@
                             <div style="width: 32px;"></div>
                         </div>
                         <div class="content">
-                            <div class="form-group">
-                                <label class="form-label">您的留言</label>
-                                <textarea class="form-input" rows="8" placeholder="请输入您的最后留言...">亲爱的家人和朋友，感谢你们一直以来的陪伴和支持。如果我3天没有活动，这封信会自动发送给你们。请记住，我一直在你们身边。</textarea>
+                            <!-- 1. 文字留言 -->
+                            <div class="message-type-block">
+                                <div class="message-type-header">
+                                    <div class="icon-wrap text"><i class="fas fa-comment-alt"></i></div>
+                                    <span class="title">文字留言 Text Message</span>
+                                </div>
+                                <label class="form-label">您的文字留言</label>
+                                <textarea class="form-input" rows="5" placeholder="请输入您的最后留言...">亲爱的家人和朋友，感谢你们一直以来的陪伴和支持。如果我3天没有活动，这封信会自动发送给你们。请记住，我一直在你们身边。</textarea>
                             </div>
 
-                            <div style="margin-top: 20px;">
-                                <label class="form-label">收件人列表</label>
+                            <!-- 2. 语音留言 -->
+                            <div class="message-type-block">
+                                <div class="message-type-header">
+                                    <div class="icon-wrap voice"><i class="fas fa-microphone"></i></div>
+                                    <span class="title">语音留言 Voice Message</span>
+                                </div>
+                                <label class="form-label">录制语音</label>
+                                <div class="voice-record-area">
+                                    <button type="button" class="record-btn"><i class="fas fa-microphone"></i></button>
+                                    <div class="duration">点击录制 · 0:00</div>
+                                    <div style="font-size: 12px; color: #999; margin-top: 8px;">未录制</div>
+                                </div>
+                            </div>
+
+                            <!-- 3. 视频留言 -->
+                            <div class="message-type-block">
+                                <div class="message-type-header">
+                                    <div class="icon-wrap video"><i class="fas fa-video"></i></div>
+                                    <span class="title">视频留言 Video Message</span>
+                                </div>
+                                <label class="form-label">录制视频</label>
+                                <div class="video-record-area">
+                                    <button type="button" class="record-btn"><i class="fas fa-video"></i> 开始录制</button>
+                                    <div class="hint">录制一段视频留言，3天未活动时发送</div>
+                                </div>
+                            </div>
+
+                            <!-- 收件人列表（三种留言统一发送给以下收件人） -->
+                            <div style="margin-top: 8px;">
+                                <label class="form-label">收件人列表（以上留言将发送给）</label>
                                 <div class="contact-list">
                                     <div class="contact-item">
                                         <div class="contact-info">
@@ -956,7 +1200,7 @@
                     </div>
                 </div>
                 <div class="screen-description">
-                    <strong>功能说明：</strong>设置最后留言内容和收件人列表。留言会在3天未活动时自动发送给所有收件人。支持添加、编辑和删除收件人。
+                    <strong>功能说明：</strong>最后留言设置分为三种类型独立编辑：<strong>文字留言</strong>（输入框）、<strong>语音留言</strong>（点击录制，显示时长）、<strong>视频留言</strong>（点击录制视频）。收件人列表统一管理，3天未活动时三种留言将一并发送给所有收件人。
                 </div>
             </div>
         </div>
