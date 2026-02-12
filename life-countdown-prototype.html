@@ -12,6 +12,14 @@
             box-sizing: border-box;
         }
 
+        html {
+            scroll-behavior: smooth;
+        }
+
+        .screen-card[id] {
+            scroll-margin-top: 24px;
+        }
+
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
             background: #f5f7fa;
@@ -305,6 +313,17 @@
         .last-words-option-arrow {
             color: #7A8C99;
             font-size: 14px;
+        }
+
+        /* Link wrapper for last-words options - keeps card look, enables navigation */
+        a.last-words-option-link {
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+
+        a.last-words-option-link .last-words-option {
+            cursor: pointer;
         }
 
         .stats-grid {
@@ -858,36 +877,42 @@
                                     最后留言 Last Words
                                 </div>
                                 <div class="last-words-options">
-                                    <div class="last-words-option">
-                                        <div class="last-words-option-icon text">
-                                            <i class="fas fa-comment-alt"></i>
+                                    <a href="#last-words-text" class="last-words-option-link">
+                                        <div class="last-words-option">
+                                            <div class="last-words-option-icon text">
+                                                <i class="fas fa-comment-alt"></i>
+                                            </div>
+                                            <div class="last-words-option-content">
+                                                <div class="last-words-option-label">文字留言</div>
+                                                <div class="last-words-option-desc">Text message · 3天未活动时发送</div>
+                                            </div>
+                                            <i class="fas fa-chevron-right last-words-option-arrow"></i>
                                         </div>
-                                        <div class="last-words-option-content">
-                                            <div class="last-words-option-label">文字留言</div>
-                                            <div class="last-words-option-desc">Text message · 3天未活动时发送</div>
+                                    </a>
+                                    <a href="#last-words-voice" class="last-words-option-link">
+                                        <div class="last-words-option">
+                                            <div class="last-words-option-icon voice">
+                                                <i class="fas fa-microphone"></i>
+                                            </div>
+                                            <div class="last-words-option-content">
+                                                <div class="last-words-option-label">语音留言</div>
+                                                <div class="last-words-option-desc">Voice message · 录制并发送</div>
+                                            </div>
+                                            <i class="fas fa-chevron-right last-words-option-arrow"></i>
                                         </div>
-                                        <i class="fas fa-chevron-right last-words-option-arrow"></i>
-                                    </div>
-                                    <div class="last-words-option">
-                                        <div class="last-words-option-icon voice">
-                                            <i class="fas fa-microphone"></i>
+                                    </a>
+                                    <a href="#last-words-video" class="last-words-option-link">
+                                        <div class="last-words-option">
+                                            <div class="last-words-option-icon video">
+                                                <i class="fas fa-video"></i>
+                                            </div>
+                                            <div class="last-words-option-content">
+                                                <div class="last-words-option-label">视频留言</div>
+                                                <div class="last-words-option-desc">Video message · 录制并发送</div>
+                                            </div>
+                                            <i class="fas fa-chevron-right last-words-option-arrow"></i>
                                         </div>
-                                        <div class="last-words-option-content">
-                                            <div class="last-words-option-label">语音留言</div>
-                                            <div class="last-words-option-desc">Voice message · 录制并发送</div>
-                                        </div>
-                                        <i class="fas fa-chevron-right last-words-option-arrow"></i>
-                                    </div>
-                                    <div class="last-words-option">
-                                        <div class="last-words-option-icon video">
-                                            <i class="fas fa-video"></i>
-                                        </div>
-                                        <div class="last-words-option-content">
-                                            <div class="last-words-option-label">视频留言</div>
-                                            <div class="last-words-option-desc">Video message · 录制并发送</div>
-                                        </div>
-                                        <i class="fas fa-chevron-right last-words-option-arrow"></i>
-                                    </div>
+                                    </a>
                                 </div>
                             </div>
                         </div>
@@ -913,7 +938,7 @@
                     </div>
                 </div>
                 <div class="screen-description">
-                    <strong>功能说明：</strong>首页展示生命倒计时（年、月、日、时、分、秒），实时更新。显示总天数统计和上次活动时间。最后留言区域提供三种方式：文字留言、语音留言、视频留言，点击可进入对应编辑或录制界面，3天未活动时自动发送给收件人。
+                    <strong>功能说明：</strong>首页展示生命倒计时与总天数、上次活动时间。最后留言区域提供三个入口：点击「文字留言」进入文字留言页，点击「语音留言」进入语音留言页，点击「视频留言」进入视频留言页，每种留言独立一页编辑，3天未活动时自动发送给收件人。
                 </div>
             </div>
 
@@ -1122,9 +1147,9 @@
                 </div>
             </div>
 
-            <!-- 最后留言设置页 -->
-            <div class="screen-card">
-                <div class="screen-title">最后留言设置</div>
+            <!-- 文字留言页（从首页点击「文字留言」进入） -->
+            <div class="screen-card" id="last-words-text">
+                <div class="screen-title">文字留言页 Text Message</div>
                 <div class="phone-mockup">
                     <div class="phone-screen">
                         <div class="status-bar">
@@ -1137,21 +1162,61 @@
                         </div>
                         <div class="nav-bar">
                             <div class="nav-icon"><i class="fas fa-arrow-left"></i></div>
-                            <div class="nav-title">最后留言</div>
+                            <div class="nav-title">文字留言</div>
                             <div style="width: 32px;"></div>
                         </div>
                         <div class="content">
-                            <!-- 1. 文字留言 -->
                             <div class="message-type-block">
                                 <div class="message-type-header">
                                     <div class="icon-wrap text"><i class="fas fa-comment-alt"></i></div>
                                     <span class="title">文字留言 Text Message</span>
                                 </div>
                                 <label class="form-label">您的文字留言</label>
-                                <textarea class="form-input" rows="5" placeholder="请输入您的最后留言...">亲爱的家人和朋友，感谢你们一直以来的陪伴和支持。如果我3天没有活动，这封信会自动发送给你们。请记住，我一直在你们身边。</textarea>
+                                <textarea class="form-input" rows="6" placeholder="请输入您的最后留言...">亲爱的家人和朋友，感谢你们一直以来的陪伴和支持。如果我3天没有活动，这封信会自动发送给你们。请记住，我一直在你们身边。</textarea>
                             </div>
+                            <div style="margin-top: 16px;">
+                                <label class="form-label">收件人列表</label>
+                                <div class="contact-list">
+                                    <div class="contact-item">
+                                        <div class="contact-info">
+                                            <div class="contact-name">张三</div>
+                                            <div class="contact-details">📧 zhang@example.com</div>
+                                        </div>
+                                        <div class="nav-icon" style="background: rgba(255,255,255,0.95); color: #dc3545;"><i class="fas fa-trash"></i></div>
+                                    </div>
+                                </div>
+                                <div class="add-button">+ 添加收件人</div>
+                            </div>
+                            <div class="form-actions">
+                                <button class="btn btn-primary">保存留言</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="screen-description">
+                    <strong>功能说明：</strong>从首页点击「文字留言」进入此页。仅编辑文字留言内容及收件人，保存后 3 天未活动时发送。
+                </div>
+            </div>
 
-                            <!-- 2. 语音留言 -->
+            <!-- 语音留言页（从首页点击「语音留言」进入） -->
+            <div class="screen-card" id="last-words-voice">
+                <div class="screen-title">语音留言页 Voice Message</div>
+                <div class="phone-mockup">
+                    <div class="phone-screen">
+                        <div class="status-bar">
+                            <div class="status-left">9:41</div>
+                            <div class="status-right">
+                                <i class="fas fa-signal"></i>
+                                <i class="fas fa-wifi"></i>
+                                <i class="fas fa-battery-three-quarters"></i>
+                            </div>
+                        </div>
+                        <div class="nav-bar">
+                            <div class="nav-icon"><i class="fas fa-arrow-left"></i></div>
+                            <div class="nav-title">语音留言</div>
+                            <div style="width: 32px;"></div>
+                        </div>
+                        <div class="content">
                             <div class="message-type-block">
                                 <div class="message-type-header">
                                     <div class="icon-wrap voice"><i class="fas fa-microphone"></i></div>
@@ -1164,23 +1229,8 @@
                                     <div style="font-size: 12px; color: #999; margin-top: 8px;">未录制</div>
                                 </div>
                             </div>
-
-                            <!-- 3. 视频留言 -->
-                            <div class="message-type-block">
-                                <div class="message-type-header">
-                                    <div class="icon-wrap video"><i class="fas fa-video"></i></div>
-                                    <span class="title">视频留言 Video Message</span>
-                                </div>
-                                <label class="form-label">录制视频</label>
-                                <div class="video-record-area">
-                                    <button type="button" class="record-btn"><i class="fas fa-video"></i> 开始录制</button>
-                                    <div class="hint">录制一段视频留言，3天未活动时发送</div>
-                                </div>
-                            </div>
-
-                            <!-- 收件人列表（三种留言统一发送给以下收件人） -->
-                            <div style="margin-top: 8px;">
-                                <label class="form-label">收件人列表（以上留言将发送给）</label>
+                            <div style="margin-top: 16px;">
+                                <label class="form-label">收件人列表</label>
                                 <div class="contact-list">
                                     <div class="contact-item">
                                         <div class="contact-info">
@@ -1192,7 +1242,6 @@
                                 </div>
                                 <div class="add-button">+ 添加收件人</div>
                             </div>
-
                             <div class="form-actions">
                                 <button class="btn btn-primary">保存留言</button>
                             </div>
@@ -1200,7 +1249,61 @@
                     </div>
                 </div>
                 <div class="screen-description">
-                    <strong>功能说明：</strong>最后留言设置分为三种类型独立编辑：<strong>文字留言</strong>（输入框）、<strong>语音留言</strong>（点击录制，显示时长）、<strong>视频留言</strong>（点击录制视频）。收件人列表统一管理，3天未活动时三种留言将一并发送给所有收件人。
+                    <strong>功能说明：</strong>从首页点击「语音留言」进入此页。仅录制与管理语音留言及收件人，保存后 3 天未活动时发送。
+                </div>
+            </div>
+
+            <!-- 视频留言页（从首页点击「视频留言」进入） -->
+            <div class="screen-card" id="last-words-video">
+                <div class="screen-title">视频留言页 Video Message</div>
+                <div class="phone-mockup">
+                    <div class="phone-screen">
+                        <div class="status-bar">
+                            <div class="status-left">9:41</div>
+                            <div class="status-right">
+                                <i class="fas fa-signal"></i>
+                                <i class="fas fa-wifi"></i>
+                                <i class="fas fa-battery-three-quarters"></i>
+                            </div>
+                        </div>
+                        <div class="nav-bar">
+                            <div class="nav-icon"><i class="fas fa-arrow-left"></i></div>
+                            <div class="nav-title">视频留言</div>
+                            <div style="width: 32px;"></div>
+                        </div>
+                        <div class="content">
+                            <div class="message-type-block">
+                                <div class="message-type-header">
+                                    <div class="icon-wrap video"><i class="fas fa-video"></i></div>
+                                    <span class="title">视频留言 Video Message</span>
+                                </div>
+                                <label class="form-label">录制视频</label>
+                                <div class="video-record-area">
+                                    <button type="button" class="record-btn"><i class="fas fa-video"></i> 开始录制</button>
+                                    <div class="hint">录制一段视频留言，3天未活动时发送</div>
+                                </div>
+                            </div>
+                            <div style="margin-top: 16px;">
+                                <label class="form-label">收件人列表</label>
+                                <div class="contact-list">
+                                    <div class="contact-item">
+                                        <div class="contact-info">
+                                            <div class="contact-name">张三</div>
+                                            <div class="contact-details">📧 zhang@example.com</div>
+                                        </div>
+                                        <div class="nav-icon" style="background: rgba(255,255,255,0.95); color: #dc3545;"><i class="fas fa-trash"></i></div>
+                                    </div>
+                                </div>
+                                <div class="add-button">+ 添加收件人</div>
+                            </div>
+                            <div class="form-actions">
+                                <button class="btn btn-primary">保存留言</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="screen-description">
+                    <strong>功能说明：</strong>从首页点击「视频留言」进入此页。仅录制与管理视频留言及收件人，保存后 3 天未活动时发送。
                 </div>
             </div>
         </div>
